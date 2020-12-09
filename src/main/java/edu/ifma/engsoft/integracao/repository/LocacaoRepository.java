@@ -16,7 +16,7 @@ public class LocacaoRepository {
     }
 
     public Locacao buscaPor(Long id) {
-        return daoGenerico.buscarPorId(Locacao.class, id);
+        return daoGenerico.buscaPorId(Locacao.class, id);
     }
 
     public Locacao salvaOuAtualiza(Locacao locacao) {

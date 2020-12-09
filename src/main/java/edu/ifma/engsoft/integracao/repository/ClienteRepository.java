@@ -15,7 +15,7 @@ public class ClienteRepository {
     }
 
     public Cliente buscaPor(Long id) {
-        return daoGenerico.buscarPorId(Cliente.class, id);
+        return daoGenerico.buscaPorId(Cliente.class, id);
     }
 
     public Cliente salvaOuAtualiza(Cliente cliente) {

@@ -12,7 +12,7 @@ class DAOGenerico<T extends EntidadeBase> {
         this.manager = manager;
     }
 
-    T buscarPorId(Class<T> clazz, Long id) {
+    T buscaPorId(Class<T> clazz, Long id) {
         return manager.find(clazz, id);
     }
 
