@@ -24,10 +24,10 @@ public class Locacao implements EntidadeBase{
     private boolean ativo;
     private String observacao;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Imovel imovel;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cliente inquilino;
 
     @OneToMany(mappedBy = "locacao", cascade = CascadeType.ALL)
@@ -42,4 +42,9 @@ public class Locacao implements EntidadeBase{
     public Long getId() {
         return idLocacao;
     }
+
+    public void adicionaAluguel(Aluguel aluguel){
+        this.alugueis.add(aluguel);
+    }
+
 }

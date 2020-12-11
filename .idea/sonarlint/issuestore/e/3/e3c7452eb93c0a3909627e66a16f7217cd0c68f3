@@ -1,2 +1,8 @@
 
-g	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8µÊ—Ÿä.
+S
+java:S1068
+"1Remove this unused "imovelService" private field.(ŞèçÅıÿÿÿÿ8ÈÄüä.
+]
+java:S1854";Remove this useless assignment to local variable "cliente".(ÕÔå…ıÿÿÿÿ8ÈÄüä.
+N
+java:S1481",Remove this unused "cliente" local variable.(ÕÔå…ıÿÿÿÿ8ÈÄüä.

@@ -8,11 +8,11 @@ import edu.ifma.engsoft.integracao.util.exception.LocacaoException;
 import javax.persistence.EntityManager;
 import java.util.Objects;
 
-public class ClienteService {
+public class CadastroClienteService {
     private final ClienteRepository repository;
     private final EntityManager manager;
 
-    public ClienteService(){
+    public CadastroClienteService(){
         this.manager = new EMFactory().getEntityManager();
         this.repository = new ClienteRepository(manager);
     }
@@ -43,7 +43,7 @@ public class ClienteService {
             return cliente;
         }
 
-        String erro = "Não foi encontrada nenhuma locaçãoo para o id informado.";
+        String erro = "Não foi encontrado nenhum cliente para o id informado.";
         throw new LocacaoException(erro);
     }
 

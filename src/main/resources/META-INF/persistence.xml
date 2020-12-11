@@ -5,7 +5,7 @@
              version="2.1">
 
 
-    <persistence-unit name="imobiliaria" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="locadora" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
@@ -32,7 +32,7 @@
 
     </persistence-unit>
 
-    <persistence-unit name="imobiliaria_test" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="locadora_test" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 

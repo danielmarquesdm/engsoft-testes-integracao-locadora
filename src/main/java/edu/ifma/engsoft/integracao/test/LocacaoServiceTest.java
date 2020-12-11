@@ -8,7 +8,7 @@ import edu.ifma.engsoft.integracao.util.EMFactory;
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 
-public class LocacaoRepositoryTest {
+public class LocacaoServiceTest {
     public static void main(String[] args) {
         EMFactory factory = new EMFactory();
         EntityManager manager = factory.getEntityManager();

@@ -10,11 +10,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class AluguelService {
+public class CadastroAluguelService {
     private final EntityManager manager;
     private final AluguelRepository repository;
 
-    public AluguelService(){
+    public CadastroAluguelService(){
         this.manager = new EMFactory().getEntityManager();
         this.repository = new AluguelRepository(manager);
     }
