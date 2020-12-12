@@ -6,7 +6,7 @@
 
     <groupId>edu.ifma.engsoft.integracao</groupId>
     <artifactId>teste-integracao-locadora-imoveis</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
