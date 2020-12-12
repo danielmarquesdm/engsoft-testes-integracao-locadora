@@ -18,8 +18,4 @@ public class Aluguel {
     private BigDecimal valorPago;
     private LocalDate dataDePagamento;
     private String observacao;
-
-    public Aluguel(Locacao locacao){
-        this.locacao = locacao;
-    }
 }

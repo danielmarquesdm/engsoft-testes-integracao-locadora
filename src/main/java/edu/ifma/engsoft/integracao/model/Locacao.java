@@ -5,12 +5,10 @@ import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Data
 @Entity
-public class Locacao implements EntidadeBase{
+public class Locacao implements EntidadeBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -30,9 +28,6 @@ public class Locacao implements EntidadeBase{
     @ManyToOne(cascade = CascadeType.ALL)
     private Cliente inquilino;
 
-    @OneToMany(mappedBy = "locacao", cascade = CascadeType.ALL)
-    private Set<Aluguel> alugueis = new LinkedHashSet<>();
-
     public Locacao(Imovel imovel, Cliente cliente) {
         this.imovel = imovel;
         this.inquilino = cliente;
@@ -41,10 +36,6 @@ public class Locacao implements EntidadeBase{
     @Override
     public Long getId() {
         return idLocacao;
-    }
-
-    public void adicionaAluguel(Aluguel aluguel){
-        this.alugueis.add(aluguel);
     }
 
 }

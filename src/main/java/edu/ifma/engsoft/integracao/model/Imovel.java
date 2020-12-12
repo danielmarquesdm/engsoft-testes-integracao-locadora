@@ -5,8 +5,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Data
 @Entity
@@ -28,9 +26,6 @@ public class Imovel implements EntidadeBase {
     private int vagasGaragem;
     private BigDecimal valorAluguelSugerido;
     private String observacao;
-
-    @OneToMany(mappedBy = "imovel", cascade = CascadeType.ALL)
-    private Set<Locacao> locacoesDoImovel = new LinkedHashSet<>();
 
     @Override
     public Long getId() {
