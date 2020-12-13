@@ -1,6 +1,5 @@
 package edu.ifma.engsoft.integracao.model;
 
-import edu.ifma.engsoft.integracao.enums.TipoImovel;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,8 +13,8 @@ public class Imovel implements EntidadeBase {
     @Column(name = "id")
     private Long idImovel;
 
-    @Enumerated(EnumType.STRING)
-    private TipoImovel tipoImovel;
+    private String tipoImovel;
+    private String nome;
     private String endereco;
     private String bairro;
     private int cep;

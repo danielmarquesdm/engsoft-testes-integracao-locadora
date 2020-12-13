@@ -11,8 +11,6 @@ l
 <src/main/java/edu/ifma/engsoft/integracao/model/Locacao.java,9\d\9d5853646ef4c2755a600e3d538a67c112a1bf94
 U
 %teste-integracao-locadora-imoveis.iml,1\9\1942574a23774a91810431e239c1338df6b26c96
-o
-?src/main/java/edu/ifma/engsoft/integracao/enums/TipoImovel.java,f\1\f1d866f12e10dd5e72ae4f80f073cd9cfcfa082a
 q
 Asrc/main/java/edu/ifma/engsoft/integracao/model/EntidadeBase.java,6\7\67ee3be4155468600a174bf58839f3fd53ae1376
 ~
@@ -33,3 +31,17 @@ z
 Jsrc/main/java/edu/ifma/engsoft/integracao/repository/ImovelRepository.java,5\0\50c0f86d8b797df195a727468483fa9a9c7565a2
 t
 Dsrc/test/java/edu/ifma/engsoft/integracao/builder/ImovelBuilder.java,3\c\3ca1791b3d571f08d40a505093b69d15b6d57746
+u
+Esrc/test/java/edu/ifma/engsoft/integracao/builder/ClienteBuilder.java,f\4\f44ae6bf200e5456784662cd9fc8aa0afed71997
+
+Osrc/test/java/edu/ifma/engsoft/integracao/repository/ClienteRepositoryTest.java,6\5\650a77500b1924fc2ab9bf1d89f9dfc557e1d8ad
+~
+Nsrc/test/java/edu/ifma/engsoft/integracao/repository/ImovelRepositoryTest.java,7\f\7f48b8c8cdc247d39367d6171e5eb02691c9aefb
+u
+Esrc/test/java/edu/ifma/engsoft/integracao/builder/LocacaoBuilder.java,1\2\128f0b878a22ae5fb82f0634d0e55b4d630bdf6c
+
+Osrc/test/java/edu/ifma/engsoft/integracao/repository/LocacaoRepositoryTest.java,6\6\6698f243e29a52d83d67dbcb6aa673ce4dd001d9
+u
+Esrc/test/java/edu/ifma/engsoft/integracao/builder/AluguelBuilder.java,d\4\d4ec05565f6522a70688d82b10d65bfecd814872
+
+Osrc/test/java/edu/ifma/engsoft/integracao/repository/AluguelRepositoryTest.java,f\e\fe2337cfecaeaf62e509fae4f00ee7441780feef

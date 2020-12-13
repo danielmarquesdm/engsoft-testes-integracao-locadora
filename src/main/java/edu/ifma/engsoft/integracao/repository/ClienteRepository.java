@@ -14,8 +14,10 @@ public class ClienteRepository {
         this.daoGenerico = new DAOGenerico<>(manager);
     }
 
-    public Cliente buscaPor(Long id) {
-        return daoGenerico.buscaPorId(Cliente.class, id);
+    public Cliente buscaPor(String nome) {
+        return manager.createQuery("From Cliente c where c.nomeCliente = :nome", Cliente.class)
+                .setParameter("nome", nome)
+                .getSingleResult();
     }
 
     public Cliente salvaOuAtualiza(Cliente cliente) {

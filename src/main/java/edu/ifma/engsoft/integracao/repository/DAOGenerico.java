@@ -12,10 +12,6 @@ class DAOGenerico<T extends EntidadeBase> {
         this.manager = manager;
     }
 
-    T buscaPorId(Class<T> clazz, Long id) {
-        return manager.find(clazz, id);
-    }
-
     T salvaOuAtualiza(T t) {
         if (Objects.isNull(t.getId()))
             this.manager.persist(t);
@@ -26,7 +22,7 @@ class DAOGenerico<T extends EntidadeBase> {
 
     void remove(T t) {
         if (Objects.nonNull(t.getId())) {
-            manager.remove(t);
+            manager.remove(manager.merge(t));
             manager.flush();
         }
     }

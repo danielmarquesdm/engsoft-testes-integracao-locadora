@@ -16,29 +16,29 @@ public class AluguelRepository {
 
     public Aluguel buscaPor(LocalDate dataDeVencimento) {
         return manager
-                .createQuery("from Aluguel a where a.dataDeVencimento = :dataDeVencimento", Aluguel.class)
+                .createQuery("SELECT a FROM Aluguel a where a.dataDeVencimento = :dataDeVencimento", Aluguel.class)
                 .setParameter("dataDeVencimento", dataDeVencimento)
                 .getSingleResult();
     }
 
-    public Aluguel salvaOuAtualiza(Aluguel aluguel){
-        if (Objects.isNull(aluguel.getDataDeVencimento()))
-            this.manager.persist(aluguel);
-        else
-            aluguel = this.manager.merge(aluguel);
-        return aluguel;
+    public void salva(Aluguel aluguel) {
+        this.manager.persist(aluguel);
     }
 
-    public List<Aluguel> buscaTodos() {
-        return manager
-                .createQuery("select * from Aluguel", Aluguel.class)
-                .getResultList();
+    public void atualiza(Aluguel aluguel) {
+        this.manager.merge(aluguel);
     }
 
-    public void remove(Aluguel aluguel){
-        if(Objects.nonNull(aluguel.getDataDeVencimento())){
+    public void remove(Aluguel aluguel) {
+        if (Objects.nonNull(aluguel.getDataDeVencimento())) {
             manager.remove(aluguel);
             manager.flush();
         }
+    }
+
+    public List<Aluguel> buscaAlugueisPagosPor(String nomeCliente) {
+        return this.manager.createQuery("SELECT a FROM Aluguel a INNER JOIN Locacao l ON a.locacao.id = l.id INNER JOIN Cliente c ON C.id = l.cliente.id WHERE c.nomeCliente = :nome", Aluguel.class)
+        .setParameter("nome", nomeCliente)
+        .getResultList();
     }
 }

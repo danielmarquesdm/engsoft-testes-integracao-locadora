@@ -14,12 +14,12 @@ public class Locacao implements EntidadeBase {
     @Column(name = "id")
     private Long idLocacao;
 
+    private boolean ativo;
     private BigDecimal valorAluguel;
     private double percentualMulta;
     private int diaVencimento;
     private LocalDate dataInicio;
     private LocalDate dataFim;
-    private boolean ativo;
     private String observacao;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -27,6 +27,9 @@ public class Locacao implements EntidadeBase {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Cliente inquilino;
+
+    public Locacao() {
+    }
 
     public Locacao(Imovel imovel, Cliente cliente) {
         this.imovel = imovel;

@@ -1,5 +1,3 @@
 
-i
-java:S57776"NMove assertions into separate method or use assertThrows or try-catch instead.(ª÷Ù¼øÿÿÿÿ
-~
-java:S1607I"\Either add an explanation about why this test is skipped or remove the "@Ignore" annotation.(Î¢úÿÿÿÿÿ8ÄÈ¢»å.
+t
+java:S5778N"RRefactor the code of the lambda to have only one invocation throwing an exception.(£ÉÇ†ıÿÿÿÿ8™Ü»Èå.

@@ -12,7 +12,7 @@ public class Aluguel {
     @Id
     private LocalDate dataDeVencimento;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
     private Locacao locacao;
 
     private BigDecimal valorPago;
