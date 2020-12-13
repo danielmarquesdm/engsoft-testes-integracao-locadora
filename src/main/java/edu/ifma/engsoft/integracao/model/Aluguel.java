@@ -8,14 +8,25 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-public class Aluguel {
+public class Aluguel implements EntidadeBase {
     @Id
-    private LocalDate dataDeVencimento;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long idAluguel;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
     private Locacao locacao;
 
+    private LocalDate dataDeVencimento;
     private BigDecimal valorPago;
     private LocalDate dataDePagamento;
     private String observacao;
+
+    public Aluguel() {
+    }
+
+    @Override
+    public Long getId() {
+        return idAluguel;
+    }
 }
