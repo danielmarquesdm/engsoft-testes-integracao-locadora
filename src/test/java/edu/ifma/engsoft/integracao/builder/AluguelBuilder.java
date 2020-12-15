@@ -1,8 +1,8 @@
 package edu.ifma.engsoft.integracao.builder;
 
 import edu.ifma.engsoft.integracao.model.Aluguel;
+import edu.ifma.engsoft.integracao.model.Cliente;
 import edu.ifma.engsoft.integracao.model.Locacao;
-import org.mockito.cglib.core.Local;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -27,6 +27,11 @@ public class AluguelBuilder {
 
     public AluguelBuilder paraUmCliente(String nome) {
         aluguel.getLocacao().getInquilino().setNomeCliente(nome);
+        return this;
+    }
+
+    public AluguelBuilder paraUmCliente(Cliente cliente) {
+        aluguel.getLocacao().setInquilino(cliente);
         return this;
     }
 

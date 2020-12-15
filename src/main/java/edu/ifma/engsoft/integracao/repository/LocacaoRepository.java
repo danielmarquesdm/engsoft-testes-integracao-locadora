@@ -50,4 +50,9 @@ public class LocacaoRepository {
                 .setParameter("ativo", false)
                 .getResultList();
     }
+
+    public List<Locacao> emAtraso() {
+        return manager.createQuery("SELECT l FROM Locacao l INNER JOIN Cliente c ON l.inquilino.id = c.id INNER JOIN Aluguel a ON a.locacao.id = l.id WHERE a.dataDePagamento > a.dataDeVencimento", Locacao.class)
+                .getResultList();
+    }
 }

@@ -1,7 +1,5 @@
 
 t
-java:S5778Y"RRefactor the code of the lambda to have only one invocation throwing an exception.(£ΙΗ†ύÿÿÿÿ8Ύ§λλε.
-~
-java:S1607B"\Either add an explanation about why this test is skipped or remove the "@Ignore" annotation.(ιξ·ωÿÿÿÿ8“„με.
-~
-java:S1607O"\Either add an explanation about why this test is skipped or remove the "@Ignore" annotation.(§ω­ΰωÿÿÿÿ8υΫ„με.
+java:S5778U"RRefactor the code of the lambda to have only one invocation throwing an exception.(£ΙΗ†ύÿÿÿÿ8Ύ§λλε.
+q
+java:S5777¨"NMove assertions into separate method or use assertThrows or try-catch instead.(ªχΩΌψÿÿÿÿ8¶φΰοε.

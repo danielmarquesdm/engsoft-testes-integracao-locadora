@@ -1,6 +1,7 @@
 package edu.ifma.engsoft.integracao.repository;
 
 import edu.ifma.engsoft.integracao.model.Aluguel;
+import edu.ifma.engsoft.integracao.model.Cliente;
 import edu.ifma.engsoft.integracao.util.exception.LocacaoException;
 
 import javax.persistence.EntityManager;
