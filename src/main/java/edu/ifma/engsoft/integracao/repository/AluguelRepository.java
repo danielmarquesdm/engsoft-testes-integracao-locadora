@@ -1,7 +1,6 @@
 package edu.ifma.engsoft.integracao.repository;
 
 import edu.ifma.engsoft.integracao.model.Aluguel;
-import edu.ifma.engsoft.integracao.model.Cliente;
 import edu.ifma.engsoft.integracao.util.exception.LocacaoException;
 
 import javax.persistence.EntityManager;
@@ -39,8 +38,9 @@ public class AluguelRepository {
     }
 
     public List<Aluguel> buscaAlugueisPagosPor(String nomeCliente) {
-        return this.manager.createQuery("SELECT a FROM Aluguel a INNER JOIN Locacao l ON a.locacao.id = l.id INNER JOIN Cliente c ON c.id = l.inquilino.id WHERE c.nomeCliente = :nome AND a.dataDePagamento <= dataDeVencimento", Aluguel.class)
+        return this.manager.createQuery("SELECT a FROM Aluguel a INNER JOIN Locacao l ON a.locacao.id = l.id INNER JOIN Cliente c ON c.id = l.inquilino.id WHERE c.nomeCliente = :nome AND a.valorPago > :valor", Aluguel.class)
                 .setParameter("nome", nomeCliente)
+                .setParameter("valor", BigDecimal.ZERO)
                 .getResultList();
     }
 

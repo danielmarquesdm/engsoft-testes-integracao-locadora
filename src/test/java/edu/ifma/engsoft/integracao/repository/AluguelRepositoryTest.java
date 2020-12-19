@@ -6,7 +6,6 @@ import edu.ifma.engsoft.integracao.util.EMFactory;
 import edu.ifma.engsoft.integracao.util.exception.LocacaoException;
 import org.hamcrest.Matchers;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -24,7 +23,6 @@ public class AluguelRepositoryTest {
     private static EMFactory factory;
     private EntityManager manager;
     private AluguelRepository aluguelRepository;
-    private Aluguel aluguel;
 
     @Before
     public void setUp() {
@@ -32,7 +30,6 @@ public class AluguelRepositoryTest {
         manager = factory.getEntityManager();
         manager.getTransaction().begin();
         aluguelRepository = new AluguelRepository(manager);
-        aluguel = AluguelBuilder.umAluguel().constroi();
     }
 
     @AfterEach
@@ -46,41 +43,34 @@ public class AluguelRepositoryTest {
     }
 
     @Test
-    public void deveAtualizarAluguel() {
-        Aluguel aluguel = AluguelBuilder.umAluguel().constroi();
-        aluguelRepository.salvaOuAtualiza(aluguel);
-        aluguel.setObservacao("um otimo lugar");
-        aluguelRepository.salvaOuAtualiza(aluguel);
-
-        manager.flush();
-        manager.clear();
-
-        Aluguel aluguelEncontrado = aluguelRepository.buscaPor(aluguel.getDataDeVencimento());
-        assertEquals("um otimo lugar", aluguelEncontrado.getObservacao());
+    public void deveSalvarAluguel() {
+        Aluguel aluguelEsperado = AluguelBuilder.umAluguel().constroi();
+        Aluguel aluguelSalvo = aluguelRepository.salvaOuAtualiza(aluguelEsperado);
+        assertEquals(aluguelEsperado, aluguelSalvo);
     }
 
     @Test
-    public void deveSalvarAluguel() {
-        Aluguel aluguel = AluguelBuilder.umAluguel().constroi();
-        aluguelRepository.salvaOuAtualiza(aluguel);
+    public void deveAtualizarAluguel() {
+        Aluguel aluguelEsperado = AluguelBuilder.umAluguel().constroi();
+        aluguelRepository.salvaOuAtualiza(aluguelEsperado);
+        aluguelEsperado.setValorPago(BigDecimal.ZERO);
+        aluguelRepository.salvaOuAtualiza(aluguelEsperado);
+        Aluguel aluguelQuery = aluguelRepository.buscaPorId(aluguelEsperado.getIdAluguel());
 
-        manager.flush();
-        manager.clear();
-
-        Aluguel aluguelSalvo = aluguelRepository.buscaPor(aluguel.getDataDeVencimento());
-        assertNotNull(aluguelSalvo);
+        assertEquals(aluguelEsperado.getValorPago(), aluguelQuery.getValorPago());
     }
 
     @Test
     public void deveEncontrarAluguel() {
-        aluguelRepository.salvaOuAtualiza(aluguel);
-        Aluguel aluguelSalvo = aluguelRepository.buscaPor(aluguel.getDataDeVencimento());
-        assertNotNull(aluguelSalvo);
-        assertEquals(aluguel, aluguelSalvo);
+        Aluguel aluguelEsperado = AluguelBuilder.umAluguel().constroi();
+        aluguelRepository.salvaOuAtualiza(aluguelEsperado);
+        Aluguel aluguelQuery = aluguelRepository.buscaPorId(aluguelEsperado.getIdAluguel());
+        assertEquals(aluguelEsperado, aluguelQuery);
     }
 
     @Test
     public void deveExcluirAluguel() {
+        Aluguel aluguel = AluguelBuilder.umAluguel().constroi();
         aluguelRepository.remove(aluguel);
         assertThrows(NoResultException.class,
                 () -> aluguelRepository.buscaPor(aluguel.getDataDeVencimento()),
@@ -94,12 +84,15 @@ public class AluguelRepositoryTest {
                 .comPagamentoNoValorDe(BigDecimal.valueOf(1800))
                 .constroi();
         Aluguel aluguel2 = AluguelBuilder.umAluguel()
+                .paraUmCliente("Daniel")
+                .queAindaNaoFoiPago()
                 .constroi();
         Aluguel aluguel3 = AluguelBuilder.umAluguel()
                 .paraUmCliente("Daniel")
                 .comPagamentoNoValorDe(BigDecimal.valueOf(1800))
                 .constroi();
         Aluguel aluguel4 = AluguelBuilder.umAluguel()
+                .queAindaNaoFoiPago()
                 .constroi();
 
         List<Aluguel> alugueisEsperados = new ArrayList<>();
@@ -110,17 +103,15 @@ public class AluguelRepositoryTest {
         aluguelRepository.salvaOuAtualiza(aluguel2);
         aluguelRepository.salvaOuAtualiza(aluguel3);
         aluguelRepository.salvaOuAtualiza(aluguel4);
-
-        manager.flush();
         manager.clear();
 
         List<Aluguel> alugueisAtuais = aluguelRepository.buscaAlugueisPagosPor("Daniel");
-        assertEquals(2, alugueisAtuais.size());
+        System.out.println("ALUGUEIS ATUAIS: " + alugueisAtuais);
         Matchers.arrayContainingInAnyOrder(alugueisEsperados).matches(alugueisAtuais);
     }
 
     @Test
-    public void deveRetornarAlugueisPagosComAtrasoEm() {
+    public void deveRetornarAlugueisPagosComAtraso() {
         LocalDate dataVencimento = LocalDate.of(2020, 10, 10);
         Aluguel aluguel1 = AluguelBuilder.umAluguel()
                 .comDataDeVencimento(dataVencimento)
@@ -148,7 +139,6 @@ public class AluguelRepositoryTest {
         aluguelRepository.salvaOuAtualiza(aluguel3);
         aluguelRepository.salvaOuAtualiza(aluguel4);
 
-        manager.flush();
         manager.clear();
 
         List<Aluguel> alugueisAtuais = aluguelRepository.buscaAlugueisEmAtraso(dataVencimento);

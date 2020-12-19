@@ -22,10 +22,10 @@ public class Locacao implements EntidadeBase {
     private LocalDate dataFim;
     private String observacao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Imovel imovel;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Cliente inquilino;
 
     public Locacao() {

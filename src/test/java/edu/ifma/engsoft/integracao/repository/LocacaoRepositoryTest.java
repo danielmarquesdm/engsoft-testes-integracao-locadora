@@ -10,12 +10,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -26,15 +29,17 @@ public class LocacaoRepositoryTest {
     private EntityManager manager;
     private static EMFactory factory;
     private LocacaoRepository locacaoRepository;
-    private Locacao locacao;
 
     @Before
     public void setUp() {
         factory = new EMFactory();
         manager = factory.getEntityManager();
-        manager.getTransaction().begin();
         locacaoRepository = new LocacaoRepository(manager);
-        locacao = LocacaoBuilder.umaLocacao().constroi();
+    }
+
+    @BeforeEach
+    public void inicio() {
+        manager.getTransaction().begin();
     }
 
     @AfterEach
@@ -49,67 +54,58 @@ public class LocacaoRepositoryTest {
 
     @Test
     public void deveAtualizarLocacao() {
-        LocacaoBuilder
-                .umaLocacao()
-                .ativo(true)
-                .noBairro("Araçagy")
-                .comValorAluguelSugerido(BigDecimal.valueOf(500))
-                .paraUmCliente("Daniel")
-                .constroi();
-        locacao.setPercentualMulta(0.5);
-        locacaoRepository.salvaOuAtualiza(locacao);
-
-        manager.flush();
+        Locacao locacaoEsperada = LocacaoBuilder.umaLocacao().constroi();
+        locacaoRepository.salvaOuAtualiza(locacaoEsperada);
+        locacaoEsperada.setAtivo(false);
+        Locacao locacaoSalva = locacaoRepository.salvaOuAtualiza(locacaoEsperada);
         manager.clear();
-
-        Locacao locacaoSalva = locacaoRepository
-                .buscaPor(locacao.getDataInicio());
-        MatcherAssert.assertThat(locacaoSalva.getPercentualMulta(),
-                is(equalTo(0.5)));
+        assertFalse(locacaoSalva.isAtivo());
     }
 
     @Test
     public void deveSalvarLocacao() {
-        LocacaoBuilder
+        Locacao locacaoEsperada = LocacaoBuilder
                 .umaLocacao()
-                .noBairro("Araçagy")
-                .ativo(true)
-                .paraUmCliente("Maria")
-                .comValorAluguelSugerido(BigDecimal.valueOf(1500));
-        locacaoRepository.salvaOuAtualiza(locacao);
-        Locacao locacaoSalva = locacaoRepository.buscaPor(this.locacao.getDataInicio());
+                .constroi();
+        Locacao locacaoSalva = locacaoRepository.salvaOuAtualiza(locacaoEsperada);
         assertNotNull(locacaoSalva);
+        assertEquals(locacaoEsperada, locacaoSalva);
     }
 
     @Test
     public void deveEncontrarLocacao() {
-        LocacaoBuilder
+        Locacao locacaoEsperada = LocacaoBuilder
                 .umaLocacao()
-                .comDataInicio(LocalDate.of(2020, 12, 12))
                 .constroi();
-        locacaoRepository.salvaOuAtualiza(locacao);
-        Locacao locacaoEncontrada = locacaoRepository.buscaPor(this.locacao.getDataInicio());
+        Locacao locacaoSalva = locacaoRepository.salvaOuAtualiza(locacaoEsperada);
+        manager.clear();
+        List<Locacao> locacaoEncontrada = locacaoRepository.buscaPor(locacaoSalva.getDataInicio());
         assertNotNull(locacaoEncontrada);
-        assertEquals(locacao, locacaoEncontrada);
     }
 
     @Test
     public void deveExcluirLocacao() {
-        LocacaoBuilder.umaLocacao().constroi();
+        Locacao locacao = LocacaoBuilder.umaLocacao().constroi();
+        locacaoRepository.salvaOuAtualiza(locacao);
         locacaoRepository.remove(locacao);
-        assertThrows(NoResultException.class,
-                () -> locacaoRepository.buscaPor(locacao.getDataInicio()),
-                "Deveria ter lançado a exceção NoResultException");
+        List<Locacao> locacaoEncontrada = locacaoRepository.buscaPor(locacao.getDataInicio());
+        assertEquals(Collections.emptyList(), locacaoEncontrada);
     }
 
     @Test
     public void deveRecuperarImoveisDisponiveisParaAlugar() {
-        Locacao locacao1 = LocacaoBuilder.umaLocacao().noBairro("Araçagy").tipo("casa").ativo(false).constroi();
-        Locacao locacao2 = LocacaoBuilder.umaLocacao().noBairro("Cohama").tipo("apartamento").ativo(false).constroi();
-        Locacao locacao3 = LocacaoBuilder.umaLocacao().noBairro("Cohatrac").tipo("casa").ativo(false).constroi();
-        Locacao locacao4 = LocacaoBuilder.umaLocacao().noBairro("Araçagy").tipo("apartamento").ativo(false).constroi();
-        Locacao locacao5 = LocacaoBuilder.umaLocacao().noBairro("Araçagy").tipo("apartamento").ativo(true).constroi();
-        Locacao locacao6 = LocacaoBuilder.umaLocacao().noBairro("Araçagy").tipo("apartamento").ativo(false).constroi();
+        Locacao locacao1 = LocacaoBuilder.umaLocacao()
+                .noBairro("Araçagy").tipo("casa").ativo(false).constroi();
+        Locacao locacao2 = LocacaoBuilder.umaLocacao()
+                .noBairro("Cohama").tipo("apartamento").ativo(false).constroi();
+        Locacao locacao3 = LocacaoBuilder.umaLocacao()
+                .noBairro("Cohatrac").tipo("casa").ativo(false).constroi();
+        Locacao locacao4 = LocacaoBuilder.umaLocacao()
+                .noBairro("Araçagy").tipo("apartamento").ativo(false).constroi();
+        Locacao locacao5 = LocacaoBuilder.umaLocacao()
+                .noBairro("Araçagy").tipo("apartamento").ativo(true).constroi();
+        Locacao locacao6 = LocacaoBuilder.umaLocacao()
+                .noBairro("Araçagy").tipo("apartamento").ativo(false).constroi();
 
         List<Imovel> imoveisEsperados = new ArrayList<>();
         imoveisEsperados.add(locacao4.getImovel());
@@ -122,11 +118,10 @@ public class LocacaoRepositoryTest {
         locacaoRepository.salvaOuAtualiza(locacao5);
         locacaoRepository.salvaOuAtualiza(locacao6);
 
-        manager.flush();
         manager.clear();
 
         List<Imovel> imoveisAtuais = locacaoRepository.buscaImoveisPor("Araçagy");
-        assertEquals(2, imoveisAtuais.size());
+        assertNotNull(imoveisAtuais);
         Matchers.arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
     }
 
@@ -150,11 +145,10 @@ public class LocacaoRepositoryTest {
         locacaoRepository.salvaOuAtualiza(locacao5);
         locacaoRepository.salvaOuAtualiza(locacao6);
 
-        manager.flush();
         manager.clear();
 
         List<Imovel> imoveisAtuais = locacaoRepository.buscaImoveisDisponiveisPor(BigDecimal.valueOf(1500));
-        assertEquals(2, imoveisAtuais.size());
+        assertNotNull(imoveisAtuais);
         Matchers.arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
     }
 }

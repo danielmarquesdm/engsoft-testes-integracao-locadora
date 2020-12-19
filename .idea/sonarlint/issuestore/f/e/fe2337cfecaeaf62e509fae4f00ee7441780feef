@@ -1,5 +1,5 @@
 
-t
-java:S5778U"RRefactor the code of the lambda to have only one invocation throwing an exception.(£ΙΗ†ύÿÿÿÿ8Ύ§λλε.
 q
 java:S5777¨"NMove assertions into separate method or use assertThrows or try-catch instead.(ªχΩΌψÿÿÿÿ8¶φΰοε.
+t
+java:S5778U"RRefactor the code of the lambda to have only one invocation throwing an exception.(£ΙΗ†ύÿÿÿÿ8Ύ§λλε.

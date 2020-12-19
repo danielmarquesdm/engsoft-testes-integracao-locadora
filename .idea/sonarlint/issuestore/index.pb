@@ -45,3 +45,9 @@ u
 Esrc/test/java/edu/ifma/engsoft/integracao/builder/AluguelBuilder.java,d\4\d4ec05565f6522a70688d82b10d65bfecd814872
 
 Osrc/test/java/edu/ifma/engsoft/integracao/repository/AluguelRepositoryTest.java,f\e\fe2337cfecaeaf62e509fae4f00ee7441780feef
+w
+Gsrc/main/java/edu/ifma/engsoft/integracao/service/PagamentoService.java,e\3\e3624ba279931247bd4b142e74517392d73966bd
+w
+Gsrc/test/java/edu/ifma/engsoft/integracao/service/EmailServiceTest.java,b\f\bf46d8fc124f3f4835784b4859bef9b8428c39c2
+s
+Csrc/main/java/edu/ifma/engsoft/integracao/service/EmailService.java,0\f\0f67d0cad536d23035038bb37814999e43aea58e

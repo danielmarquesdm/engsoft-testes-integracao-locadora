@@ -1,7 +1,6 @@
 package edu.ifma.engsoft.integracao.builder;
 
 import edu.ifma.engsoft.integracao.model.Aluguel;
-import edu.ifma.engsoft.integracao.model.Cliente;
 import edu.ifma.engsoft.integracao.model.Locacao;
 
 import java.math.BigDecimal;
@@ -30,8 +29,8 @@ public class AluguelBuilder {
         return this;
     }
 
-    public AluguelBuilder paraUmCliente(Cliente cliente) {
-        aluguel.getLocacao().setInquilino(cliente);
+    public AluguelBuilder queAindaNaoFoiPago() {
+        aluguel.setValorPago(BigDecimal.ZERO);
         return this;
     }
 

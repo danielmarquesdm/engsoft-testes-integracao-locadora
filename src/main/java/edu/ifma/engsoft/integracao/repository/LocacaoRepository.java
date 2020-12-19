@@ -19,10 +19,10 @@ public class LocacaoRepository {
         this.daoGenerico = new DAOGenerico<>(manager);
     }
 
-    public Locacao buscaPor(LocalDate dataInicio) {
-        return manager.createQuery("From Locacao l where l.dataInicio = :data", Locacao.class)
+    public List<Locacao> buscaPor(LocalDate dataInicio) {
+        return manager.createQuery("SELECT l FROM Locacao l WHERE l.dataInicio = :data", Locacao.class)
                 .setParameter("data", dataInicio)
-                .getSingleResult();
+                .getResultList();
     }
 
     public Locacao salvaOuAtualiza(Locacao locacao) {

@@ -14,7 +14,7 @@ public class Aluguel implements EntidadeBase {
     @Column(name = "id")
     private Long idAluguel;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
+    @ManyToOne
     private Locacao locacao;
 
     private LocalDate dataDeVencimento;

@@ -21,8 +21,10 @@ public class LocacaoBuilder {
         builder.locacao.setValorAluguel(BigDecimal.valueOf(500));
         builder.locacao.setPercentualMulta(0);
         builder.locacao.setDiaVencimento(10);
-        builder.locacao.setDataInicio(LocalDate.now());
-        builder.locacao.setDataFim(LocalDate.now().plusWeeks(1));
+        builder.locacao
+                .setDataInicio(LocalDate.of(2020, 12, 10));
+        builder.locacao
+                .setDataFim(LocalDate.of(2020, 12, 17));
         builder.locacao.setAtivo(true);
         builder.locacao.setObservacao("Próximo a hospital e shoppping");
         return builder;
