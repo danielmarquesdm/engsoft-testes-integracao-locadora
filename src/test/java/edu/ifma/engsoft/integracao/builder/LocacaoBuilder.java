@@ -30,6 +30,11 @@ public class LocacaoBuilder {
         return builder;
     }
 
+    public LocacaoBuilder comId(Long id) {
+        locacao.setIdLocacao(id);
+        return this;
+    }
+
     public LocacaoBuilder ativo(boolean ativo) {
         locacao.setAtivo(ativo);
         return this;
@@ -55,8 +60,18 @@ public class LocacaoBuilder {
         return this;
     }
 
-    public LocacaoBuilder paraUmCliente(String nome) {
+    public LocacaoBuilder paraUmClienteDeNome(String nome) {
         locacao.getInquilino().setNomeCliente(nome);
+        return this;
+    }
+
+    public LocacaoBuilder paraUmCliente(Cliente cliente) {
+        locacao.setInquilino(cliente);
+        return this;
+    }
+
+    public LocacaoBuilder paraUmImovel(Imovel imovel) {
+        locacao.setImovel(imovel);
         return this;
     }
 

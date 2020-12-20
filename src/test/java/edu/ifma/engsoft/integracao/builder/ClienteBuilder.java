@@ -27,6 +27,11 @@ public class ClienteBuilder {
         return this;
     }
 
+    public ClienteBuilder comId(Long id) {
+        cliente.setIdCliente(id);
+        return this;
+    }
+
     public Cliente constroi() {
         return cliente;
     }

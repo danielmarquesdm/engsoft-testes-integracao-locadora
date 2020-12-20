@@ -16,7 +16,7 @@ public class AluguelBuilder {
         Locacao locacao = LocacaoBuilder.umaLocacao().constroi();
         AluguelBuilder builder = new AluguelBuilder();
         builder.aluguel = new Aluguel();
-        builder.aluguel.setDataDeVencimento(LocalDate.of(2020,12,10));
+        builder.aluguel.setDataDeVencimento(LocalDate.of(2020, 12, 10));
         builder.aluguel.setDataDePagamento(LocalDate.of(2020, 12, 4));
         builder.aluguel.setLocacao(locacao);
         builder.aluguel.setObservacao("Proximo à praia");
@@ -24,8 +24,18 @@ public class AluguelBuilder {
         return builder;
     }
 
+    public AluguelBuilder comId(Long id) {
+        aluguel.setIdAluguel(id);
+        return this;
+    }
+
     public AluguelBuilder paraUmCliente(String nome) {
         aluguel.getLocacao().getInquilino().setNomeCliente(nome);
+        return this;
+    }
+
+    public AluguelBuilder comValorAluguel(BigDecimal valor) {
+        aluguel.getLocacao().setValorAluguel(valor);
         return this;
     }
 
@@ -51,6 +61,11 @@ public class AluguelBuilder {
 
     public AluguelBuilder comPagamentoNoValorDe(BigDecimal valor) {
         aluguel.setValorPago(valor);
+        return this;
+    }
+
+    public AluguelBuilder paraUmaLocacao(Locacao locacao) {
+        aluguel.setLocacao(locacao);
         return this;
     }
 

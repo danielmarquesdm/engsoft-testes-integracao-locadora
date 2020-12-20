@@ -1,6 +1,7 @@
 package edu.ifma.engsoft.integracao.repository;
 
 import edu.ifma.engsoft.integracao.model.Aluguel;
+import edu.ifma.engsoft.integracao.model.Locacao;
 import edu.ifma.engsoft.integracao.util.exception.LocacaoException;
 
 import javax.persistence.EntityManager;
@@ -75,5 +76,10 @@ public class AluguelRepository {
         } else {
             return valor;
         }
+    }
+
+    public List<Aluguel> emAtraso() {
+        return manager.createQuery("SELECT a FROM Aluguel a INNER JOIN Locacao l ON a.locacao.id = l.id INNER JOIN Cliente c ON l.inquilino.id = c.id WHERE a.dataDePagamento > a.dataDeVencimento", Aluguel.class)
+                .getResultList();
     }
 }

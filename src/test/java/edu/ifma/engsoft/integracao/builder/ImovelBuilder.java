@@ -30,4 +30,8 @@ public class ImovelBuilder {
         return imovel;
     }
 
+    public ImovelBuilder comId(Long id) {
+        imovel.setIdImovel(id);
+        return this;
+    }
 }

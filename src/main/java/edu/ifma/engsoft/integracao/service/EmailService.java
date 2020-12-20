@@ -1,8 +1,9 @@
 package edu.ifma.engsoft.integracao.service;
 
+import edu.ifma.engsoft.integracao.model.Aluguel;
 import edu.ifma.engsoft.integracao.model.Cliente;
-import edu.ifma.engsoft.integracao.model.Locacao;
-import edu.ifma.engsoft.integracao.repository.LocacaoRepository;
+import edu.ifma.engsoft.integracao.repository.AluguelRepository;
+import edu.ifma.engsoft.integracao.util.EMFactory;
 import edu.ifma.engsoft.integracao.util.exception.LocacaoException;
 
 import javax.persistence.EntityManager;
@@ -10,15 +11,17 @@ import java.util.List;
 
 
 public class EmailService {
-    private EntityManager manager;
-    private LocacaoRepository repository = new LocacaoRepository(manager);
+    private static EMFactory factory = new EMFactory();
+    private EntityManager manager = factory.getEntityManager();
+    private AluguelRepository aluguelRepository = new AluguelRepository(manager);
 
     public boolean enviaEmailParaClientesEmAtraso() {
-        List<Locacao> locacoes = repository.emAtraso();
-        locacoes.forEach(l -> {
+        List<Aluguel> alugueisAtrasados = aluguelRepository.emAtraso();
+        alugueisAtrasados.forEach(aluguel -> {
             try {
-                notificaCliente(l.getInquilino());
+                notificaCliente(aluguel.getLocacao().getInquilino());
             } catch (LocacaoException e) {
+                //TODO CASO LANCE EXCEÇÃO DEVE CONTINUAR ENVIANDO EMAIL PARA OS OUTROS INQUILINOS
                 System.out.println("ERRO AO NOTIFICAR CLIENTE. " + e.getMessage());
             }
         });
