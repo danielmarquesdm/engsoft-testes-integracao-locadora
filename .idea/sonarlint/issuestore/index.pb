@@ -51,3 +51,5 @@ w
 Gsrc/test/java/edu/ifma/engsoft/integracao/service/EmailServiceTest.java,b\f\bf46d8fc124f3f4835784b4859bef9b8428c39c2
 s
 Csrc/main/java/edu/ifma/engsoft/integracao/service/EmailService.java,0\f\0f67d0cad536d23035038bb37814999e43aea58e
+{
+Ksrc/test/java/edu/ifma/engsoft/integracao/service/PagamentoServiceTest.java,4\1\411524581567362055c05b3ad6bbeb9be1a84a7e

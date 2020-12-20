@@ -1,9 +1,7 @@
 package edu.ifma.engsoft.integracao.repository;
 
 import edu.ifma.engsoft.integracao.builder.ImovelBuilder;
-import edu.ifma.engsoft.integracao.builder.LocacaoBuilder;
 import edu.ifma.engsoft.integracao.model.Imovel;
-import edu.ifma.engsoft.integracao.model.Locacao;
 import edu.ifma.engsoft.integracao.util.EMFactory;
 import org.junit.Before;
 import org.junit.Test;

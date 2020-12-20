@@ -4,8 +4,6 @@ import edu.ifma.engsoft.integracao.builder.LocacaoBuilder;
 import edu.ifma.engsoft.integracao.model.Imovel;
 import edu.ifma.engsoft.integracao.model.Locacao;
 import edu.ifma.engsoft.integracao.util.EMFactory;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
@@ -13,16 +11,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LocacaoRepositoryTest {
@@ -122,7 +116,7 @@ public class LocacaoRepositoryTest {
 
         List<Imovel> imoveisAtuais = locacaoRepository.buscaImoveisPor("Araçagy");
         assertNotNull(imoveisAtuais);
-        Matchers.arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
+        arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
     }
 
     @Test
@@ -149,6 +143,6 @@ public class LocacaoRepositoryTest {
 
         List<Imovel> imoveisAtuais = locacaoRepository.buscaImoveisDisponiveisPor(BigDecimal.valueOf(1500));
         assertNotNull(imoveisAtuais);
-        Matchers.arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
+        arrayContainingInAnyOrder(imoveisEsperados).matches(imoveisAtuais);
     }
 }

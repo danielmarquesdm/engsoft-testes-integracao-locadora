@@ -1,5 +1,7 @@
 
+O
+java:S2699Q"-Add at least one assertion to this test case.(ßøìÂùÿÿÿÿ8šÛ„äç.
 q
-java:S5777¨"NMove assertions into separate method or use assertThrows or try-catch instead.(ª÷Ù¼øÿÿÿÿ8¶öàïå.
+java:S5777"NMove assertions into separate method or use assertThrows or try-catch instead.(ª÷Ù¼øÿÿÿÿ8¶öàïå.
 t
-java:S5778U"RRefactor the code of the lambda to have only one invocation throwing an exception.(£ÉÇ†ıÿÿÿÿ8¾§ëëå.
+java:S5778K"RRefactor the code of the lambda to have only one invocation throwing an exception.(£ÉÇ†ıÿÿÿÿ8¾§ëëå.
